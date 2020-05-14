@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Spinner from "../layout/Spinner";
+import Repos from "../repos/Repos";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom"; //allows back button functionality
 
@@ -14,6 +15,7 @@ export class User extends Component {
     user: PropTypes.object.isRequired,
     getUser: PropTypes.func.isRequired,
     getUserRepos: PropTypes.func.isRequired,
+    getUserRepo: PropTypes.array.isRequired,
   };
   render() {
     const {
@@ -32,7 +34,7 @@ export class User extends Component {
       hireable,
     } = this.props.user;
 
-    const { loading } = this.props;
+    const { loading, repos } = this.props;
 
     if (loading) return <Spinner />;
     return (
@@ -98,6 +100,7 @@ export class User extends Component {
           <div className='badge badge-light'>Public Repos {public_repos}</div>
           <div className='badge badge-dark'>Public Gists: {public_gists}</div>
         </div>
+        <Repos repos={repos} />
       </Fragment>
     );
   }
